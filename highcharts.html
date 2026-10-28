@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highcharts Vue</title>
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+        "highcharts": "https://cdn.jsdelivr.net/npm/highcharts@12.6.2/esm/highcharts.js",
+        "highcharts-vue": "https://esm.sh/highcharts-vue@2.0.1?external=vue,highcharts"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import { createApp, ref } from 'vue'
+    import { Dog } from './components/Dog.js'
+    import { TestChart } from './components/TestChart.js'
+
+    const app = createApp({
+      components: {
+        Dog,
+        TestChart
+      },
+      setup() {
+        const greeting = ref('Hello World')
+        return { greeting }
+      },
+      data() {
+        return {
+          count: 0
+        }
+      },
+      methods: {
+        increment() {
+          this.count += 1
+        }
+      },
+      watch: {
+        count() {
+          this.greeting = 'Hello World'
+        }
+      },
+      template: `
+        <div>
+          <p>{{ greeting }}</p>
+          <p>{{ count }}</p>
+          <button type="button" @click="increment">Increment</button>
+          <div id="future-work">
+            <dog dogname="Stinker"></dog>
+            <TestChart></TestChart>
+          </div>
+        </div>
+      `
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+</html>
